@@ -7,6 +7,7 @@ Our team will be working on a Fantasy Football app for our term project. Our min
 * [Zar Mendoza](https://github.com/emendoza8/CIS350-HW2-Mendoza) (Backend, Testing)
 * [Josh Fletcher](https://github.com/Fletcher313/CIS350-HW2-FLETCHER) (Backend, GUI)
 * [Ben Ziegler](https://github.com/benziegler/CIS350-HW2-Ziegler) (GUI, Testing)
+* [Andrew Adkins](https://github.com/Andrew8066/CIS350-HW2-ADKINS) (Backend, GUI)
 
 ## Prerequisites
 We will need to refresh our skills in Python and investigate other potential development environments and libraries. 
