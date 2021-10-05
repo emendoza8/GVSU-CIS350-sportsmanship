@@ -13,7 +13,7 @@ The purpose of this document is to outline the requirements needed to implement 
 ## Non-Functional Requirements
 
 1. Draft Feature
-        1. The draft feature shall only allow the user 30 seconds to make their pick before a player is randomly drafted to their team.
-        2. The draft feature shall only allow each player to choose one player per round.
-        3. The draft feature shall consist of 16 rounds before the teams are locked in.
+	1. The draft feature shall only allow the user 30 seconds to make their pick before a player is randomly drafted to their team.
+	2. The draft feature shall only allow each player to choose one player per round.
+	3. The draft feature shall consist of 16 rounds before the teams are locked in.
 2. Next Feature
