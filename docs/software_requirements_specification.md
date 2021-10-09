@@ -18,6 +18,10 @@ The purpose of this document is to outline the requirements needed to implement 
 	1. R7: The roster shall only allow 9 players in the starting lineup and 7 players on the bench. 
 	2. R8: The roster shall only allow 1 QB, 2 RB, 2 WR, 1 TE, 1 FLX, 1 K, and 1 D/ST in a starting lineup. 
 	3. R9: The system shall allow any position player to be rostered at the FLX position, except for quarterback.  
+4. Schedule System
+	1. R10: The schedule system shall include the dates and times of each upcoming game.
+	2. R11: The schedule system shall include stats and scoring of past games.
+	3. R12: The schedule system shall have a side display for the user's players who do not have a game in the current week.
 	
 ## Non-Functional Requirements
 
@@ -36,4 +40,7 @@ The purpose of this document is to outline the requirements needed to implement 
 	3. R9: For WR/TE, the system shall give 6 points per TD reception, 0.1 per receiving yard, and 1 point per reception. 
 	4. R10: For Kickers, the system shall give 1 point per PAT made, 3 points per 0-39 yard FG, 4 points per 40-49 yard FG, 5 points per 50-59 yard FG, and 6 points per 60+ yard FG. 
 	5. R11: For D/ST, the system shall give 6 points per defensive/special teams TD, 2 points per interception, fumble, safety, or blocked punt/FG, and 1 point per sack. 
- 
+4. Schedule System
+	1. R12: The schedule system shall allow the user to scroll through the list of games.
+	2. R13: The schedule system shall update player stats for each game in live time.
+	3. R14: The schedule system shall sort the games with active players for a user to the top of the screen.
