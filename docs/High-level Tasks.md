@@ -1,6 +1,6 @@
 ## High-level Tasks
 
-#### <u>Task 1<\u>
+#### <u>Task 1 <\u>
 Name: GUI
 
 Description: Make a user friendly GUI that allows the user to easily navagate between their team, matchups, and settings.
