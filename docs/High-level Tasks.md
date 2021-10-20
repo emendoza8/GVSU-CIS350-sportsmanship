@@ -2,9 +2,13 @@
 
 #### Task 1
 Name: GUI
+
 Description: Make a user friendly GUI that allows the user to easily navagate between their team, matchups, and settings.
+
 Estimated Time: 7 days
+
 Responsible: TBD
+
 Status: INCOMPLETE
 
 #### Task 2
