@@ -1,6 +1,6 @@
 from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
-from kivymd.uix.button import MDRectangleFlatIconButton,MDRaisedButton
+from kivymd.uix.button import MDRectangleFlatIconButton,MDRaisedButton,MDFillRoundFlatButton
 from kivymd.uix.label import MDLabel
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.textfield import MDTextFieldRect,MDTextField
@@ -8,12 +8,13 @@ from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.uix.tab import MDTabs,MDTabsBase
 from kivymd.uix.toolbar import MDToolbar
-from kivymd.uix.list import MDList, ThreeLineListItem,OneLineListItem
+from kivymd.uix.list import MDList, ThreeLineListItem,OneLineListItem,OneLineAvatarIconListItem
 from kivy.uix.scrollview import ScrollView
 from kivy.clock import Clock 
 from kivy.core.window import Window
 
-#Window.size = (500,900)
+#Uncomment this to see app in a phone size window
+#Window.size = (400,600)
 
 #screen_helper create all of the different screens including Login,Draft,and the Main Menu and uses the build in KivyMd tool to add textboxes,labels,etc
 screen_helper = """
@@ -33,29 +34,27 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': 1}
             left_action_items: [['menu']]
 
-        MDFloatLayout:
-            md_bg_color: 0,0,0,.5
+        MDBoxLayout:
+            orientation: 'horizontal'
             MDTextFieldRect:
                 id: teamname
                 hint_text: 'Enter Team Name:'
                 mode: 'rectangle'
                 max_text_length: 20
-                pos_hint: {'center_x': .45, 'center_y': .6}
-                size_hint:.5,.1
+                size_hint:.5,.15
                 multiline: False
 
-            MDRaisedButton:
+            MDFillRoundFlatButton:
                 text: 'Save'
-                halign: 'center'
-                pos_hint: {'center_x': .8, 'center_y': .595}
                 on_press:
-                    teamName = teamname.text           
+                    teamName = teamname.text
+        MDFloatLayout:
 
-            MDRaisedButton:
+            MDFillRoundFlatButton:
                 text: 'Ready to Draft'
                 halign: 'center'
                 pos_hint: {'center_x': .5, 'center_y': .1}
-                on_press:
+                on_release:
                     root.manager.current = 'draftScreen'
 
 <DraftScreen>:
@@ -66,13 +65,34 @@ ScreenManager:
             title:'Draft'
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': 1}
-        MDList:
-            id: 'players'
-        MDFloatLayout:
-            MDRaisedButton:
-                text: 'Next'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            MDLabel:
                 halign: 'center'
                 pos_hint: {'center_x': .5, 'center_y': .5}
+                id: counter
+                text: '30'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDTextFieldRound:
+                id: playerName
+                hint_text: 'Search by player name:'
+                mode: 'rectangle'
+                halign: 'center'
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                max_text_length: 20
+                size_hint: .8,.2
+                multiline: False
+            ScrollView:
+                MDList:
+                    id: container
+                    divider: 'Full'
+
+        MDFloatLayout:
+            MDFillRoundFlatButton:
+                text: 'Skip'
+                halign: 'center'
+                pos_hint: {'center_x': .8, 'center_y': .5}
                 on_press:
                     root.manager.current = 'mainMenu'
     
@@ -89,18 +109,23 @@ ScreenManager:
             left_action_items: [['menu']]
         MDTabs:
             id: tabs
-            on_tab_switch: app.on_tab_switch(*args)
+            Tab:
+                text: 'Home'
+                id: homeTab
+                MDLabel:
+                    text: 'home'
+            Tab:
+                text: 'MyTeam'
+                id: myTeamTab
+                MDLabel:
+                    text:'team'
+            Tab:
+                text: 'OppTeam'
+                id: oppTeamTab
+                MDLabel:
+                    text:'oppteam'
            
-
 <Tabs>:
-    MDLabel:
-        halign: 'center'
-        Tab:
-            id: draft
-            text: 'Draft'
-        Tab:
-            id: myteam
-            text: 'My Team'
             
 
 """
@@ -109,6 +134,16 @@ class LoginScreen(Screen):
     pass
 #creates the draftscreen screen
 class DraftScreen(Screen):
+
+    def on_enter(self):
+        Clock.schedule_interval(self.update_label,1)
+        for i in range(20):
+            self.ids.container.add_widget(OneLineAvatarIconListItem(text="player {}".format(i)))
+    def update_label(self, *args):
+        if(self.ids.counter.text == str(int(0))):
+            self.ids.counter.text = str(int(30))
+        else:
+            self.ids.counter.text = str(int(self.ids.counter.text) - 1)
     pass
 #creates the main menu screen
 class MainMenu(Screen):
@@ -127,22 +162,14 @@ sm.add_widget(MainMenu(name='mainMenu'))
 class MainApp(MDApp):
     #builds the app and returns the screen
     def build(self):
+        self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.primary_palette = 'BlueGray'
         screen = Screen()
 
         self.screen_build = Builder.load_string(screen_helper)
         screen.add_widget(self.screen_build)
 
         return screen
-    #adds all the tabs as widgets to the main screen
-    def on_start(self):
-        self.screen_build.get_screen('mainMenu').ids.tabs.add_widget(Tab(text = 'Draft'))
-        self.screen_build.get_screen('mainMenu').ids.tabs.add_widget(Tab(text = 'My Team'))
-        self.screen_build.get_screen('mainMenu').ids.tabs.add_widget(Tab(text = 'Opp Team'))
-    #determines what occurs when a tab is switched on the main screen (currently nothing )
-    def on_tab_switch(self,instance_tabs,instance_tab,instance_tab_label,tab_text):
-        currentTab = instance_tab.text
-        #if(currentTab == 'My Team'):
-            #self.root.current = 'loginScreen'
 
 #runs the app if it is called as main
 if __name__ == '__main__':
