@@ -17,6 +17,18 @@ from kivy.core.window import Window
 #Window.size = (400,600)
 
 #screen_helper create all of the different screens including Login,Draft,and the Main Menu and uses the build in KivyMd tool to add textboxes,labels,etc
+
+playerList = open("nflPlayers.txt","r")
+
+arr = []
+userTeam = []
+
+for i in playerList:
+    arr.append(i)
+
+def getplayer(i):
+    return arr[i]
+
 screen_helper = """
 ScreenManager:
     LoginScreen:
@@ -87,6 +99,7 @@ ScreenManager:
                 MDList:
                     id: container
                     divider: 'Full'
+                    on_press:
 
         MDFloatLayout:
             MDFillRoundFlatButton:
@@ -112,13 +125,19 @@ ScreenManager:
             Tab:
                 text: 'Home'
                 id: homeTab
+                MDBoxLayout:
+                    orientation: 'vertical'
                 MDLabel:
                     text: 'home'
             Tab:
                 text: 'MyTeam'
                 id: myTeamTab
-                MDLabel:
-                    text:'team'
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    ScrollView:
+                        MDList:
+                            id: container2
+                            divider: 'Full'
             Tab:
                 text: 'OppTeam'
                 id: oppTeamTab
@@ -126,6 +145,7 @@ ScreenManager:
                     text:'oppteam'
            
 <Tabs>:
+<OneLineAvatarIconListItem>:
             
 
 """
@@ -137,8 +157,8 @@ class DraftScreen(Screen):
 
     def on_enter(self):
         Clock.schedule_interval(self.update_label,1)
-        for i in range(20):
-            self.ids.container.add_widget(OneLineAvatarIconListItem(text="player {}".format(i)))
+        for i in range(0,len(arr)):
+            self.ids.container.add_widget(OneLineAvatarIconListItem(text= str(getplayer(i)), on_press = lambda x: userTeam.append(x.text)))
     def update_label(self, *args):
         if(self.ids.counter.text == str(int(0))):
             self.ids.counter.text = str(int(30))
@@ -147,6 +167,9 @@ class DraftScreen(Screen):
     pass
 #creates the main menu screen
 class MainMenu(Screen):
+    def on_enter(self):
+        for i in range(0,len(userTeam)):
+            self.ids.container2.add_widget(OneLineAvatarIconListItem(text = str(getplayer(i))))
     pass
 #creates the tabs for the main menu screen
 class Tab(FloatLayout, MDTabsBase):
