@@ -1,0 +1,33 @@
+<MainMenu>:
+    name: 'mainMenu'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: 'Main Menu'
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': 1}
+            left_action_item: [['menu']]
+        MDTabs:
+            id: tabs
+            Tab:
+                text: 'Home'
+                id: homeTab
+                MDBoxLayout:
+                    orientation: 'vertical'
+                MDLabel:
+                    id:userTeam
+                    text:'teamname goes here'
+            Tab:
+                text: 'MyTeam'
+                id: myTeamTab
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    ScrollView:
+                        MDList:
+                            id: container2
+                            divider: 'Full'
+            Tab:
+                text: 'OppTeam'
+                id: oppTeamTab
+                MDLabel:
+                    text: 'oppteam'

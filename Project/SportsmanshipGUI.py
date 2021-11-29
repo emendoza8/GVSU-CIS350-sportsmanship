@@ -1,4 +1,5 @@
 from kivymd.app import MDApp
+from kivy.uix.widget import Widget
 from kivymd.uix.screen import Screen
 from kivymd.uix.button import MDRectangleFlatIconButton,MDRaisedButton,MDFillRoundFlatButton
 from kivymd.uix.label import MDLabel
@@ -14,7 +15,7 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 
 #Uncomment this to see app in a phone size window
-#Window.size = (400,600)
+Window.size = (400,600)
 
 #screen_helper create all of the different screens including Login,Draft,and the Main Menu and uses the build in KivyMd tool to add textboxes,labels,etc
 
@@ -29,136 +30,21 @@ for i in playerList:
 def getplayer(i):
     return arr[i]
 
-screen_helper = """
-ScreenManager:
-    LoginScreen:
-    DraftScreen:
-    MainMenu:
-
-<LoginScreen>:
-    id: loginScreen
-    name: 'loginScreen'
-    MDBoxLayout:
-        orientation: 'vertical'
-        MDToolbar:
-            title: 'SportsmanShip Fantasy Football'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': 1}
-            left_action_items: [['menu']]
-
-        MDBoxLayout:
-            orientation: 'horizontal'
-            MDTextFieldRect:
-                id: teamname
-                hint_text: 'Enter Team Name:'
-                mode: 'rectangle'
-                max_text_length: 20
-                size_hint:.5,.15
-                multiline: False
-
-            MDFillRoundFlatButton:
-                text: 'Save'
-                on_press:
-                    teamName = teamname.text
-        MDFloatLayout:
-
-            MDFillRoundFlatButton:
-                text: 'Ready to Draft'
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .1}
-                on_release:
-                    root.manager.current = 'draftScreen'
-
-<DraftScreen>:
-    name: 'draftScreen'
-    MDBoxLayout:
-        orientation: 'vertical'
-        MDToolbar:
-            title:'Draft'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': 1}
-        MDBoxLayout:
-            orientation: 'horizontal'
-            MDLabel:
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .5}
-                id: counter
-                text: '30'
-        MDBoxLayout:
-            orientation: 'vertical'
-            MDTextFieldRound:
-                id: playerName
-                hint_text: 'Search by player name:'
-                mode: 'rectangle'
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .5}
-                max_text_length: 20
-                size_hint: .8,.2
-                multiline: False
-            ScrollView:
-                MDList:
-                    id: container
-                    divider: 'Full'
-                    on_press:
-
-        MDFloatLayout:
-            MDFillRoundFlatButton:
-                text: 'Skip'
-                halign: 'center'
-                pos_hint: {'center_x': .8, 'center_y': .5}
-                on_press:
-                    root.manager.current = 'mainMenu'
-    
-
-<MainMenu>:
-    name: 'mainMenu'
-    MDBoxLayout:    
-        orientation: 'vertical'
-
-        MDToolbar:
-            title: 'Main Menu'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': 1}
-            left_action_items: [['menu']]
-        MDTabs:
-            id: tabs
-            Tab:
-                text: 'Home'
-                id: homeTab
-                MDBoxLayout:
-                    orientation: 'vertical'
-                MDLabel:
-                    text: 'home'
-            Tab:
-                text: 'MyTeam'
-                id: myTeamTab
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    ScrollView:
-                        MDList:
-                            id: container2
-                            divider: 'Full'
-            Tab:
-                text: 'OppTeam'
-                id: oppTeamTab
-                MDLabel:
-                    text:'oppteam'
-           
-<Tabs>:
-<OneLineAvatarIconListItem>:
-            
-
-"""
 #creates the loginscreen screen
 class LoginScreen(Screen):
     pass
 #creates the draftscreen screen
 class DraftScreen(Screen):
-
     def on_enter(self):
         Clock.schedule_interval(self.update_label,1)
+        def select(player,instance):
+            userTeam.append(player)
+            instance.text = "Drafted ({})".format(player)
+            self.ids.counter.text = str(int(30))
+            if(len(userTeam) == 16):
+                self.parent.current = 'mainMenu'
         for i in range(0,len(arr)):
-            self.ids.container.add_widget(OneLineAvatarIconListItem(text= str(getplayer(i)), on_press = lambda x: userTeam.append(x.text)))
+            self.ids.container.add_widget(OneLineAvatarIconListItem(text= str(getplayer(i)), on_press = lambda x: select(x.text,x)))
     def update_label(self, *args):
         if(self.ids.counter.text == str(int(0))):
             self.ids.counter.text = str(int(30))
@@ -169,7 +55,7 @@ class DraftScreen(Screen):
 class MainMenu(Screen):
     def on_enter(self):
         for i in range(0,len(userTeam)):
-            self.ids.container2.add_widget(OneLineAvatarIconListItem(text = str(getplayer(i))))
+            self.ids.container2.add_widget(OneLineAvatarIconListItem(text = userTeam[i]))
     pass
 #creates the tabs for the main menu screen
 class Tab(FloatLayout, MDTabsBase):
@@ -189,7 +75,7 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = 'BlueGray'
         screen = Screen()
 
-        self.screen_build = Builder.load_string(screen_helper)
+        self.screen_build = Builder.load_file("Main.kv")
         screen.add_widget(self.screen_build)
 
         return screen
