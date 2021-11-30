@@ -5,7 +5,8 @@
     MDBoxLayout:
         orientation: 'vertical'
         MDToolbar:
-            title: 'Main Menu'
+            id: toolbar
+            title: 'Team NoTeamName'
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': 1}
             left_action_item: [['menu']]
@@ -16,9 +17,10 @@
                 id: homeTab
                 MDBoxLayout:
                     orientation: 'vertical'
-                MDLabel:
-                    id:userTeam
-                    text:'teamname goes here'
+                    MDLabel:
+                        id: totalPoints
+                        halign: 'center'
+                        text:''
             Tab:
                 text: 'MyTeam'
                 id: myTeamTab

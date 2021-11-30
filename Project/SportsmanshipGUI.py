@@ -11,6 +11,8 @@ from kivymd.uix.tab import MDTabs,MDTabsBase
 from kivymd.uix.toolbar import MDToolbar
 from kivymd.uix.list import MDList, ThreeLineListItem,OneLineListItem,OneLineAvatarIconListItem
 from kivy.uix.scrollview import ScrollView
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.datatables import MDDataTable
 from kivy.clock import Clock 
 from kivy.core.window import Window
 import pandas as pd
@@ -24,6 +26,8 @@ df = pd.read_excel('Test.xlsx', 'Sheet1')
 #playerNames and playerPositions are both list that read in different colomns from the excel file
 playerNames = df['Player'].values.tolist()
 playerPositions = df['FantPos'].values.tolist()
+CurrentTotalFantasyPointsPerPlayer = df['Fantasy FantPt'].values.tolist()
+teamNameByPlayer = df['Tm'].values.tolist()
 
 #List that is set to empty and will contain the names displayed of each player and positon
 draftDisplayList = []
@@ -37,6 +41,27 @@ teamName = 'No Teamname Entered'
 
 #List that holds the users team after draft is complete
 userTeam = []
+
+def getPlayersTeam(index):
+    return teamNameByPlayer[index]
+
+def getPlayersTotalPoints(index):
+    return CurrentTotalFantasyPointsPerPlayer[index]
+
+def getTotalTeamPoints():
+    total = 0
+    for x in userTeam:
+        index = getIndexOfPlayer(x)
+        total = total + float(getPlayersTotalPoints(index))
+    return total
+
+def getIndexOfPlayer(name):
+    index = 0
+    for x in draftDisplayList:
+        if str(name) == str(x):
+            return index
+        else:
+            index = index + 1
 
 #Function that takes in an int and returns the player at that index
 def getplayer(i):
@@ -72,8 +97,20 @@ class DraftScreen(Screen):
 class MainMenu(Screen):
     #When mainmenu screen is entered the list on the myteam tab will be filled with the users drafed players
     def on_enter(self):
+        self.ids.toolbar.title = teamName
+        self.ids.totalPoints.text = 'Total Team Fantasy Points: ' + str(getTotalTeamPoints())
+        def playerInfo(player, instance):
+            playerindex = getIndexOfPlayer(player)
+            totalFantasyPoints = getPlayersTotalPoints(playerindex)
+            playerTeam = getPlayersTeam(playerindex)
+            dialog = MDDialog(
+                    title = player,
+                    text = 'Team: ' + str(playerTeam) + 
+                    '\nTotal Points this season: ' + str(totalFantasyPoints)
+                    )
+            dialog.open()
         for i in range(0,len(userTeam)):
-            self.ids.container2.add_widget(OneLineAvatarIconListItem(text = userTeam[i]))
+            self.ids.container2.add_widget(OneLineAvatarIconListItem(text = userTeam[i], on_press = lambda y: playerInfo(y.text,y)))
     pass
 #creates the tabs for the main menu screen
 class Tab(FloatLayout, MDTabsBase):
@@ -97,6 +134,10 @@ class MainApp(MDApp):
         screen.add_widget(self.screen_build)
 
         return screen
+
+    def setTeamName(self,text):
+        global teamName
+        teamName = text
 
 #runs the app if it is called as main
 if __name__ == '__main__':

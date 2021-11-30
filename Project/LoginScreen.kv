@@ -19,10 +19,11 @@
                 max_text_length: 20
                 size_hint:.5,.15
                 multiline: False
+                on_text: self.focus
 
             MDFillRoundFlatButton:
                 text: 'Save'
-                on_press:
+                on_press: app.setTeamName(teamname.text)
                     
         MDFloatLayout:
 
