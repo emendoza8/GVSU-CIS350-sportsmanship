@@ -13,38 +13,54 @@ from kivymd.uix.list import MDList, ThreeLineListItem,OneLineListItem,OneLineAva
 from kivy.uix.scrollview import ScrollView
 from kivy.clock import Clock 
 from kivy.core.window import Window
+import pandas as pd
 
 #Uncomment this to see app in a phone size window
 Window.size = (400,600)
 
-#screen_helper create all of the different screens including Login,Draft,and the Main Menu and uses the build in KivyMd tool to add textboxes,labels,etc
+#df is a variable that reads in an excel file using pandas (currently reads in top 200 NFL players by fantasy points)
+df = pd.read_excel('Test.xlsx', 'Sheet1')
 
-playerList = open("nflPlayers.txt","r")
+#playerNames and playerPositions are both list that read in different colomns from the excel file
+playerNames = df['Player'].values.tolist()
+playerPositions = df['FantPos'].values.tolist()
 
-arr = []
+#List that is set to empty and will contain the names displayed of each player and positon
+draftDisplayList = []
+
+#loops through the player list and concatinates the name and position together for display purposes
+for x in range(0, len(playerPositions)):
+    draftDisplayList.append(str(playerNames[x]) + ' (' + str(playerPositions[x]) + ')')
+
+#Holds the users teamname (currently very buggy)
+teamName = 'No Teamname Entered'
+
+#List that holds the users team after draft is complete
 userTeam = []
 
-for i in playerList:
-    arr.append(i)
-
+#Function that takes in an int and returns the player at that index
 def getplayer(i):
-    return arr[i]
+    return draftDisplayList[i]
 
 #creates the loginscreen screen
 class LoginScreen(Screen):
     pass
 #creates the draftscreen screen
 class DraftScreen(Screen):
+    #When screen is entered this function will start the clock and add widgets to a KivyMD list that displays the players name and position and has a on_press property that calls the select function for the draft
     def on_enter(self):
         Clock.schedule_interval(self.update_label,1)
+        #this method takes in 2 parameters player is a string with the players name the other is the instance id of the KivyMD list object which allows you to change the text or even delete that object
+        #Method currently appends the selected player to the userTeam list then changes the display name to show that player was drafted then resets the clock and checks if the player has a full team and if so the screen is switched to the mainMenu and the draft feature is no longer accessable 
         def select(player,instance):
             userTeam.append(player)
             instance.text = "Drafted ({})".format(player)
             self.ids.counter.text = str(int(30))
             if(len(userTeam) == 16):
                 self.parent.current = 'mainMenu'
-        for i in range(0,len(arr)):
+        for i in range(0,len(draftDisplayList)):
             self.ids.container.add_widget(OneLineAvatarIconListItem(text= str(getplayer(i)), on_press = lambda x: select(x.text,x)))
+    #This method can be used to update the timer label so it counts down and resets to 30 when it hits 0
     def update_label(self, *args):
         if(self.ids.counter.text == str(int(0))):
             self.ids.counter.text = str(int(30))
@@ -53,6 +69,7 @@ class DraftScreen(Screen):
     pass
 #creates the main menu screen
 class MainMenu(Screen):
+    #When mainmenu screen is entered the list on the myteam tab will be filled with the users drafed players
     def on_enter(self):
         for i in range(0,len(userTeam)):
             self.ids.container2.add_widget(OneLineAvatarIconListItem(text = userTeam[i]))
@@ -69,7 +86,7 @@ sm.add_widget(MainMenu(name='mainMenu'))
 
 #Main class the builds the app and returns the screen that includes the screen manager
 class MainApp(MDApp):
-    #builds the app and returns the screen
+    #builds the app and returns the screen also sets the theme of the app and loads the .kv files
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'BlueGray'
