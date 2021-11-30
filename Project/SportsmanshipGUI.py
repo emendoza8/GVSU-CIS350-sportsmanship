@@ -56,6 +56,7 @@ class DraftScreen(Screen):
             userTeam.append(player)
             instance.text = "Drafted ({})".format(player)
             self.ids.counter.text = str(int(30))
+            self.ids.currentTeamSize.text = str(len(userTeam))
             if(len(userTeam) == 16):
                 self.parent.current = 'mainMenu'
         for i in range(0,len(draftDisplayList)):

@@ -8,16 +8,29 @@
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': 1}
         MDBoxLayout:
-            orientation: 'horizontal'
-            MDLabel:
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .5}
-                text: 'Time left to draft:'
-            MDLabel:
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .5}
-                id: counter
-                text: '30'
+            orientation: 'vertical'
+            MDBoxLayout:
+                orientation: 'horizontal'
+                MDLabel:
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    text: 'Time left to draft:'
+                MDLabel:
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    id: counter
+                    text: '30'
+            MDBoxLayout:
+                orientation: 'horizontal'
+                MDLabel:
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    text: 'Players on team:'
+                MDLabel:
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    id: currentTeamSize
+                    text: '0'
         MDBoxLayout:
             orientation: 'vertical'
             MDTextFieldRound:
