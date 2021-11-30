@@ -28,6 +28,7 @@ playerNames = df['Player'].values.tolist()
 playerPositions = df['FantPos'].values.tolist()
 CurrentTotalFantasyPointsPerPlayer = df['Fantasy FantPt'].values.tolist()
 teamNameByPlayer = df['Tm'].values.tolist()
+setTeamSize = 9
 
 #List that is set to empty and will contain the names displayed of each player and positon
 draftDisplayList = []
@@ -81,8 +82,8 @@ class DraftScreen(Screen):
             userTeam.append(player)
             instance.text = "Drafted ({})".format(player)
             self.ids.counter.text = str(int(30))
-            self.ids.currentTeamSize.text = str(len(userTeam))
-            if(len(userTeam) == 16):
+            self.ids.currentTeamSize.text = str(len(userTeam)) + '/' + str(setTeamSize)
+            if(len(userTeam) == setTeamSize):
                 self.parent.current = 'mainMenu'
         for i in range(0,len(draftDisplayList)):
             self.ids.container.add_widget(OneLineAvatarIconListItem(text= str(getplayer(i)), on_press = lambda x: select(x.text,x)))
