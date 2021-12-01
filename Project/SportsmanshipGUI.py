@@ -15,6 +15,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.datatables import MDDataTable
 from kivy.clock import Clock 
 from kivy.core.window import Window
+import webbrowser
 import pandas as pd
 
 #Uncomment this to see app in a phone size window
@@ -43,12 +44,15 @@ teamName = 'No Teamname Entered'
 #List that holds the users team after draft is complete
 userTeam = []
 
+#Takes in an integer and gives the name of the player at the index
 def getPlayersTeam(index):
     return teamNameByPlayer[index]
 
+#Takes in an integer and gives the total fantasy points that player has this season
 def getPlayersTotalPoints(index):
     return CurrentTotalFantasyPointsPerPlayer[index]
 
+#Loops through the users team and calculates the total fantasy points that team has this season
 def getTotalTeamPoints():
     total = 0
     for x in userTeam:
@@ -56,6 +60,7 @@ def getTotalTeamPoints():
         total = total + float(getPlayersTotalPoints(index))
     return total
 
+#Takes in a string(players name) and finds the index in the list that that player is at and returns that integer
 def getIndexOfPlayer(name):
     index = 0
     for x in draftDisplayList:
@@ -96,7 +101,8 @@ class DraftScreen(Screen):
     pass
 #creates the main menu screen
 class MainMenu(Screen):
-    #When mainmenu screen is entered the list on the myteam tab will be filled with the users drafed players
+    #When mainmenu screen is entered the list on the myteam tab will be filled with the users drafted players
+    #When a player on the myTeam tab is clicked a dialog window appears with info on the player
     def on_enter(self):
         self.ids.toolbar.title = teamName
         self.ids.totalPoints.text = 'Total Team Fantasy Points: ' + str(getTotalTeamPoints())
@@ -135,10 +141,19 @@ class MainApp(MDApp):
         screen.add_widget(self.screen_build)
 
         return screen
-
+    
+    #used to set the global variable teamname to the text entered in the textfield on login screen
     def setTeamName(self,text):
         global teamName
         teamName = text
+
+    #These functions each used the webbrowser import to load different websites based on the url entered
+    def loadInjuryReportWeb(self):
+        webbrowser.open('https://www.espn.com/nfl/injuries')
+    def loadNewsWeb(self):
+        webbrowser.open('https://www.nfl.com/news/')
+    def loadFantasyNewsWeb(self):
+        webbrowser.open('https://www.fantasypros.com/nfl/player-news.php')
 
 #runs the app if it is called as main
 if __name__ == '__main__':

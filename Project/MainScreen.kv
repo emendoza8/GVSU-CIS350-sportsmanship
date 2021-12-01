@@ -17,10 +17,39 @@
                 id: homeTab
                 MDBoxLayout:
                     orientation: 'vertical'
-                    MDLabel:
-                        id: totalPoints
-                        halign: 'center'
-                        text:''
+                    MDBoxLayout:
+                        orientation: 'vertical' 
+                        MDLabel:
+                            id: totalPoints
+                            halign: 'center'
+                            text:''
+                        MDLabel:
+                            text: ''
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: ''
+                        MDLabel:
+                            halign: 'center'
+                            text: 'Resources:'
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            MDFloatLayout:
+                                MDFillRoundFlatButton:
+                                    halign: 'center'
+                                    pos_hint: {'center_x': .2, 'center_y': .5}
+                                    text: 'NFL Injury Report'
+                                    on_press: app.loadInjuryReportWeb()
+                                MDFillRoundFlatButton:
+                                    halign: 'center'
+                                    pos_hint: {'center_x': .525, 'center_y': .5}
+                                    text: 'NFL News'
+                                    on_press: app.loadNewsWeb()
+                                MDFillRoundFlatButton:
+                                    halign: 'center'
+                                    pos_hint: {'center_x': .825, 'center_y': .5}
+                                    text: 'Fantasy News'
+                                    on_press: app.loadFantasyNewsWeb()
             Tab:
                 text: 'MyTeam'
                 id: myTeamTab
