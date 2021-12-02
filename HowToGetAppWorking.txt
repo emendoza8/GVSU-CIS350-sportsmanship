@@ -1,0 +1,11 @@
+All commands are done inside the project directory
+Requirements:
+- Python 3.6+ (probably 3.9)
+
+1. python -m venv virt
+2. source virt/Scripts/activate
+3. pip install Pillow
+4. pip install kivy
+5. pip install kivymd
+6. pip install Pandas
+7. pip install openpyxl
