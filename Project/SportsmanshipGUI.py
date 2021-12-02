@@ -55,15 +55,13 @@ def getPlayersTeam(index):
 def getPlayersTotalPoints(index):
     return CurrentTotalFantasyPointsPerPlayer[index]
 
-<<<<<<< Updated upstream
-=======
+
 def getPlayersTotalPointsDK(index):
     return CurrentTotalFantasyPointsPerPlayerDK[index]
 
 def getPlayersTotalPointsFD(index):
     return CurrentTotalFantasyPointsPerPlayerFD[index]
 
->>>>>>> Stashed changes
 #Loops through the users team and calculates the total fantasy points that team has this season
 def getTotalTeamPoints():
     total = 0
@@ -72,8 +70,7 @@ def getTotalTeamPoints():
         total = total + float(getPlayersTotalPoints(index))
     return total
 
-<<<<<<< Updated upstream
-=======
+
 def getTotalTeamPointsDK():
     total = 0
     for x in userTeam:
@@ -88,7 +85,7 @@ def getTotalTeamPointsFD():
         total = total + float(getPlayersTotalPointsFD(index))
     return total
 
->>>>>>> Stashed changes
+
 #Takes in a string(players name) and finds the index in the list that that player is at and returns that integer
 def getIndexOfPlayer(name):
     index = 0
