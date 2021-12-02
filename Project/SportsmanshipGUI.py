@@ -28,7 +28,10 @@ df = pd.read_excel('Test.xlsx', 'Sheet1')
 playerNames = df['Player'].values.tolist()
 playerPositions = df['FantPos'].values.tolist()
 CurrentTotalFantasyPointsPerPlayer = df['Fantasy FantPt'].values.tolist()
+CurrentTotalFantasyPointsPerPlayerDK = df['Fantasy DKPt'].values.tolist()
+CurrentTotalFantasyPointsPerPlayerFD = df['Fantasy FDPt'].values.tolist()
 teamNameByPlayer = df['Tm'].values.tolist()
+
 setTeamSize = 9
 
 #List that is set to empty and will contain the names displayed of each player and positon
@@ -52,6 +55,15 @@ def getPlayersTeam(index):
 def getPlayersTotalPoints(index):
     return CurrentTotalFantasyPointsPerPlayer[index]
 
+<<<<<<< Updated upstream
+=======
+def getPlayersTotalPointsDK(index):
+    return CurrentTotalFantasyPointsPerPlayerDK[index]
+
+def getPlayersTotalPointsFD(index):
+    return CurrentTotalFantasyPointsPerPlayerFD[index]
+
+>>>>>>> Stashed changes
 #Loops through the users team and calculates the total fantasy points that team has this season
 def getTotalTeamPoints():
     total = 0
@@ -60,6 +72,23 @@ def getTotalTeamPoints():
         total = total + float(getPlayersTotalPoints(index))
     return total
 
+<<<<<<< Updated upstream
+=======
+def getTotalTeamPointsDK():
+    total = 0
+    for x in userTeam:
+        index = getIndexOfPlayer(x)
+        total = total + float(getPlayersTotalPointsDK(index))
+    return total
+
+def getTotalTeamPointsFD():
+    total = 0
+    for x in userTeam:
+        index = getIndexOfPlayer(x)
+        total = total + float(getPlayersTotalPointsFD(index))
+    return total
+
+>>>>>>> Stashed changes
 #Takes in a string(players name) and finds the index in the list that that player is at and returns that integer
 def getIndexOfPlayer(name):
     index = 0
@@ -106,14 +135,20 @@ class MainMenu(Screen):
     def on_enter(self):
         self.ids.toolbar.title = teamName
         self.ids.totalPoints.text = 'Total Team Fantasy Points: ' + str(getTotalTeamPoints())
+        self.ids.totalPointsDK.text = 'Total Team Fantasy Points (Draft Kings): ' + str(getTotalTeamPointsDK())
+        self.ids.totalPointsFD.text = 'Total Team Fantasy Points (FanDuel): ' + str(getTotalTeamPointsFD())
         def playerInfo(player, instance):
             playerindex = getIndexOfPlayer(player)
             totalFantasyPoints = getPlayersTotalPoints(playerindex)
+            totalFantasyPointsDK = getPlayersTotalPointsDK(playerindex)
+            totalFantasyPointsFD = getPlayersTotalPointsFD(playerindex)
             playerTeam = getPlayersTeam(playerindex)
             dialog = MDDialog(
                     title = player,
                     text = 'Team: ' + str(playerTeam) + 
-                    '\nTotal Points this season: ' + str(totalFantasyPoints)
+                    '\nTotal Points this Season: ' + str(totalFantasyPoints) +
+                    '\nTotal Points this Season Draft Kings: ' + str(totalFantasyPointsDK) +
+                    '\nTotal Points this Season FanDuel: ' + str(totalFantasyPointsFD)
                     )
             dialog.open()
         for i in range(0,len(userTeam)):
