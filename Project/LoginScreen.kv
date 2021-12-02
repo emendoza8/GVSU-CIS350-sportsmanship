@@ -9,7 +9,14 @@
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': 1}
             left_action_items: [['menu']]
-
+        MDBottomAppBar:
+            MDToolbar:
+                halign: 'center'
+                title: 'Click Button to Start Drafting:'
+                icon: 'play'
+                type: 'bottom'
+                mode: 'end'
+                on_action_button: root.manager.current = 'draftScreen'
         MDBoxLayout:
             orientation: 'horizontal'
             MDTextFieldRect:
@@ -17,19 +24,21 @@
                 hint_text: 'Enter Team Name:'
                 mode: 'rectangle'
                 max_text_length: 20
-                size_hint:.5,.15
+                size_hint:.5,.25
                 multiline: False
                 on_text: self.focus
 
             MDFillRoundFlatButton:
                 text: 'Save'
                 on_press: app.setTeamName(teamname.text)
+        MDLabel:
+            text: ''
                     
         MDFloatLayout:
 
-            MDFillRoundFlatButton:
-                text: 'Ready to Draft'
-                halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .1}
-                on_release:
-                    root.manager.current = 'draftScreen'
+            #MDFillRoundFlatButton:
+                #text: 'Ready to Draft'
+                #halign: 'center'
+                #pos_hint: {'center_x': .5, 'center_y': .1}
+                #on_release:
+                    #root.manager.current = 'draftScreen'
