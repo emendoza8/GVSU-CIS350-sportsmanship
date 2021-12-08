@@ -12,10 +12,14 @@ Our team will be working on a Fantasy Football simulation app for our term proje
 ## Prerequisites
 We will need to refresh our skills in Python and investigate other potential development environments and libraries. 
 ## Run Instructions
-*-install a terminal such as Git Bash
-*-install Python 3.9
-*-Pull repository
+*install a terminal such as Git Bash
+
+*install Python 3.9
+
+*Pull repository
+
 *Run the following commands in the repository folder:
+
 1. python -m venv virt
 2. source virt/Scripts/activate
 3. pip install Pillow
