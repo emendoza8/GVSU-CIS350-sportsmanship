@@ -5,16 +5,16 @@ The purpose of this document is to outline the requirements needed to implement 
 ## Functional Requirements
 
 1. Draft Feature
-  1. R1: The draft feature shall allow the user to choose from a list of the top 250 current ranked NFL players.
-  2. R2: The draft feature shall display each players name and position.
-  3. R3: The draft feature shall contain a timer and current number of players drafted to the users team.
-  4. R4: The draft feature shall allow the user to skip the draft and be taken to the main menu screen at any point in the drafting process.
-  5. R5: The draft feature shall end when the user has a team of 9 players.
+  i. R1: The draft feature shall allow the user to choose from a list of the top 250 current ranked NFL players.
+  ii. R2: The draft feature shall display each players name and position.
+  iii. R3: The draft feature shall contain a timer and current number of players drafted to the users team.
+  iv. R4:The draft feature shall allow the user to skip the draft and be taken to the main menu screen at any point in the drafting process.
+  v. R5: The draft feature shall end when the user has a team of 9 players.
 2. Data storage
-  1. R6: The data of all players names shall be stored in lists.
-  2. R7: The data of the users drafted team shall be stored in a list seperate from the list of all players.
-  3. R8: The data of the users drafter team shall be updated when selected to allow the player to exit the draft with their selected team at anytime.
-  4. R9: The data of each players fantasy points shall be stored in a list seperate from the list of all players in the form of integers.
+  i. R6: The data of all players names shall be stored in lists.
+  ii. R7: The data of the users drafted team shall be stored in a list seperate from the list of all players.
+  iii. R8: The data of the users drafter team shall be updated when selected to allow the player to exit the draft with their selected team at anytime.
+  iv. R9: The data of each players fantasy points shall be stored in a list seperate from the list of all players in the form of integers.
   5. R10: The data that will be displayed on the draft screen shall be stored in a list seperate from the list of all players.
 3. Team Name Feature:
   1. R11: The user's teamname shall be stored in a string variable
