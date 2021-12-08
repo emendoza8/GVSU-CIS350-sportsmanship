@@ -1,6 +1,6 @@
 # Sportsmanship
 
-Our team will be working on a Fantasy Football app for our term project. Our minimum viable product will feature a minimum of two users drafting rosters of 16 NFL players and facing each other in head-to-head competition. The team whose players generate a higher score for a week’s worth of NFL games will earn a point in the overall season standings, where weekly user scores are be based on their players’ stats in live games. The general goal for users is to earn the most total matchup points by the end of the season. 
+Our team will be working on a Fantasy Football simulation app for our term project. Our app will begin by taking the user to a login screen where they can set their team name and begin the draft. The draft feature will allow a user to draft a team of 9 players using a classic draft style format with a timer and player counter. Once the draft has ended the user can view the total fantasy points of their team along with individual stats from each player.
 
 ## Team Members and Roles
 
@@ -12,3 +12,14 @@ Our team will be working on a Fantasy Football app for our term project. Our min
 ## Prerequisites
 We will need to refresh our skills in Python and investigate other potential development environments and libraries. 
 ## Run Instructions
+-install a terminal such as Git Bash
+-install Python 3.9
+-Pull repository
+Run the following commands in the repository folder:
+1. python -m venv virt
+2. source virt/Scripts/activate
+3. pip install Pillow
+4. pip install kivy
+5. pip install kivymd
+6. pip install Pandas
+7. pip install openpyxl
