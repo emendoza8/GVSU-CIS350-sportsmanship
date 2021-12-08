@@ -31,7 +31,7 @@ The purpose of this document is to outline the requirements needed to implement 
   	3. R3: The draft feature shall consist of 9 rounds before the team is locked in.
   	4. R4: The draft feature shall contain a counter that starts at 0 and increased by one eachtime a player is drafted.
   	5. R5: The draft feature shall not allow a user to draft a team smaller than 0 players.
-2. Data Pulling 
+2. Data Pulling
     	1. R6: The program shall store one total fantasy points per one player name.
     	2. R7: The program shall store 250 players.
     	3. R8: The program shall calculate the total team points by adding all total points of the players drafted.
