@@ -16,7 +16,7 @@ We will need to refresh our skills in Python and investigate other potential dev
 
 -install Python 3.9
 
--Pull repository
+-pull the repository
 
 Run the following commands in the repository folder:
 
