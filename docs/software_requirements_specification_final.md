@@ -32,11 +32,11 @@ The purpose of this document is to outline the requirements needed to implement 
   	4. R4: The draft feature shall contain a counter that starts at 0 and increased by one eachtime a player is drafted.
   	5. R5: The draft feature shall not allow a user to draft a team smaller than 0 players.
 2. Data Pulling 
-    	1. The program shall store one total fantasy points per one player name.
-    	2. The program shall store 250 players.
-    	3. The program shall calculate the total team points by adding all total points of the players drafted.
-    	4. The program shall increase the total player index by one each time a player is pulled into a list.
-    	5. The program shall store a players information in the same index across all stats.
+    	1. R6: The program shall store one total fantasy points per one player name.
+    	2. R7: The program shall store 250 players.
+    	3. R8: The program shall calculate the total team points by adding all total points of the players drafted.
+    	4. R9: The program shall increase the total player index by one each time a player is pulled into a list.
+    	5. R10: The program shall store a players information in the same index across all stats.
 3. Display
   	1. R11: The teamname text input shall allow up to 20 characters.
   	2. R12: The draft timer shall increase by one every 1 second.
