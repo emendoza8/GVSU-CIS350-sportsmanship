@@ -12,7 +12,7 @@ The purpose of this document is to outline the requirements needed to implement 
   	5. R5: The draft feature shall end when the user has a team of 9 players.
 2. Data storage
   	1. R6: The data of all players names shall be stored in lists.
-  	2. R7: The data of the users drafted team shall be stored in a list separate from the list of all players.
+  	2. R7: The data of the user's drafted team shall be stored in a list separate from the list of all players.
   	3. R8: The data of the user's drafter team shall be updated when selected to allow the player to exit the draft with their selected team at any time.
   	4. R9: The data of each player's fantasy points shall be stored in a list separate from the list of all players in the form of integers.
   	5. R10: The data that will be displayed on the draft screen shall be stored in a list separate from the list of all players.
@@ -32,7 +32,7 @@ The purpose of this document is to outline the requirements needed to implement 
   	4. R4: The draft feature shall contain a counter that starts at 0 and increased by one each time a player is drafted.
   	5. R5: The draft feature shall not allow a user to draft a team smaller than 0 players.
 2. Data Pulling
-	1. R6: The program shall store one total fantasy points per one player name.
+	1. R6: The program shall store one fantasy points total per one player name.
 	2. R7: The program shall store 250 players.
 	3. R8: The program shall calculate the total team points by adding all total points of the players drafted.
 	4. R9: The program shall increase the total player index by one each time a player is pulled into a list.
@@ -42,4 +42,4 @@ The purpose of this document is to outline the requirements needed to implement 
   	2. R12: The draft timer shall increase by one every 1 second.
   	3. R13: The screen size shall be set to 400x600.
   	4. R14: The Kivy list shall increase by one every time a player is drafted.
-  	5. R15: The Kivy list for user's team shall not be greater than 9.  
+  	5. R15: The Kivy list for a user's team shall not be greater than 9.  
